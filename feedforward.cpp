@@ -52,6 +52,13 @@ float outputNeuron(float x1, float x2, float w1, float w2, float bias){
    
 }  
 
+//Calculate mean squared error
+float calculateMSE(float target, float actual){
+   
+   float output = ((0.5) * pow((target - actual), 2));
+   return output;
+}
+
 int main (int argc, char *argv[]) {
 
    cout << "Feed forward ANN\n" << endl;
@@ -66,6 +73,8 @@ int main (int argc, char *argv[]) {
    float H1Output = 0;
    float H2Output = 0;
    float finalOutput = 0;
+   float MSE = 0;
+   float expectedOutput = 0.36;
    //Calculate hidden layer 1 output
    cout << "Hidden neuron 1 output: " << endl;
    H1Output = hiddenNeuronOutput(inputs, weightsH1, biasH1);
@@ -74,6 +83,11 @@ int main (int argc, char *argv[]) {
    cout << "Output neuron output: " << endl;
    finalOutput = outputNeuron(H1Output, H2Output, 0.8, 1, -0.3);
    
+   
+   //Calculate mean squared error
+   //Error = 1/2 * (0.36 - 0.752632)^2
+   MSE = calculateMSE(expectedOutput, finalOutput);
+   cout << "Mean squared error: " << MSE << endl;
    return 0;
    
 }
